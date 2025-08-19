@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Problem 7</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: white;
+      color: black;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    #wrapper {
+      width: 100%;
+      height: 100vh;
+      overflow: auto;
+      padding: 2em;
+      box-sizing: border-box;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false" onkeydown="return false" onmousedown="return false">
+  <div id="wrapper">
+    <canvas id="problem7" width="1200" height="2200"></canvas>
+  </div>
+  <script>
+    const ctx = document.getElementById('problem7').getContext('2d');
+    ctx.fillStyle = '#000';
+    ctx.font = '16px Arial';
+
+    const lines = [
+      "First we have to define how base 5 is used.",
+      "Base 5 involves the next digit to go up when you reach 5 on the first, similar to how in base 10 the next digit goes up by 1 when you reach 5.  Since we have to use 3 digit numbers the largest number we get is 444. If we add one we get 1000 which is no longer 3 digits.",
+      "",
+      "To convert from base 5 to base 10 we just multiply the value in the digit with the worth below then add all 3 results to get our converted number. Hopefully this helps explain bases.",
+      "",
+      "So a structure of a base 5 number is as follows:",
+      "",
+      "25c + 5b + 1a = k(25a + 5b + 1c)",
+      "",
+      "(a, b, c) are equal or less than 4",
+      "",
+      "(Result produce another base 5 number)",
+      "",
+      "We can say for the purpose of this:",
+      "",
+      "25a + 5b + 1c <  25c + 5b + 1a",
+      "",
+      "= 25a + 1c < 25c + 1a",
+      "",
+      "= c > a",
+      "So we only need to test cases of a and c which are equal or less than 4.",
+      "And also k = 25c + 5b + 1a / 25a + 5b + 1a",
+      "",
+      "Say a = 1 and c =2",
+      "",
+      "Then we can test values of b to see if k results in a positive number.",
+      " Additionally if k > 4 then it means that 25c + 5b + 1a is no longer a 3 digit number.",
+      "",
+      "If b = 0 then k = 51/27 (not whole)",
+      "If b = 1 then k = 56/32 (still not whole)",
+      "If b = 2 then k = 61/37 (STILL NOT WHOLE)",
+      "If b = 3 then k = 66/42 (SOMEHOW STILL NOT WHOLE)",
+      "If b = 4 then k = 71/47  (Welp thats all)",
+      "",
+      "And through this process we can test the 9 possibilities of a and c with c being greater than a until we find the following:",
+      "",
+      "a = 1 and c = 3",
+      "",
+      "If b = 1 then k = 81/33",
+      "If b = 2 then k = 86/38",
+      "If b = 3 then k = 91/43",
+      "If b = 4 then k = 96/48",
+      "",
+      "96/48 = 2!",
+      "",
+      "After going through all the 9 possibilities for a and c and seeing the results of b we can find that the only possibility is that a = 1 , b =4 , c = 3 and k = 2",
+      "",
+      "So 143 in base 5 (48 in base 10) multiplied by 2 results in 341 in base 5 (96 in base 10)",
+      "",
+      "And this is the ONLY way this works."
+    ];
+
+    lines.forEach((line, i) => {
+      ctx.fillText(line, 20, 30 + i * 24);
+    });
+  </script>
+</body>
+</html>
